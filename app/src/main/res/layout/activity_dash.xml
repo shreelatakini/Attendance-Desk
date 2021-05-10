@@ -7,14 +7,12 @@
     android:background="@color/backgc"
     tools:context=".DashActivity">
 
-    <ImageView
-        android:id="@+id/imageView4"
+    <Button
+        android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/circle_img"
-
-        app:srcCompat="@drawable/ic_launcher_foreground"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="142dp"
-        tools:layout_editor_absoluteY="106dp" />
+        android:background="@drawable/circle"
+        android:text="Button"
+        tools:layout_editor_absoluteX="145dp"
+        tools:layout_editor_absoluteY="82dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
