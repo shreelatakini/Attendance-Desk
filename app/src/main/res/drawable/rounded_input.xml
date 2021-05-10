@@ -4,5 +4,5 @@
     android:layout_height="wrap_content"
     android:shape="rectangle">
     <corners android:radius="24dp" />
-    <solid android:color="#7c795e" />
+    <solid android:color="#d0ebfd" />
 </shape>
