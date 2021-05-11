@@ -37,7 +37,6 @@ public class DashActivity extends AppCompatActivity {
     // above lines to add to classes page
 
 
-        
 
 
     }
