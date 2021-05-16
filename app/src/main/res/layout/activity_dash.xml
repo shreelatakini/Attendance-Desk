@@ -21,46 +21,46 @@
 
     <Button
         android:id="@+id/button2"
-        android:layout_width="126dp"
-        android:layout_height="115dp"
+        android:layout_width="310dp"
+        android:layout_height="51dp"
         android:background="@drawable/dashbuttons"
         android:text="Button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.362"
+        app:layout_constraintVertical_bias="0.364"
+        tools:layout_editor_absoluteX="50dp" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="310dp"
+        android:layout_height="51dp"
+        android:background="@drawable/dashbuttons"
+        android:text="Button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.669"
         tools:layout_editor_absoluteX="50dp" />
 
     <Button
         android:id="@+id/button4"
-        android:layout_width="126dp"
-        android:layout_height="115dp"
+        android:layout_width="310dp"
+        android:layout_height="51dp"
         android:background="@drawable/dashbuttons"
         android:text="Button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.637"
+        app:layout_constraintVertical_bias="0.564"
         tools:layout_editor_absoluteX="50dp" />
 
     <Button
         android:id="@+id/button5"
-        android:layout_width="126dp"
-        android:layout_height="115dp"
+        android:layout_width="310dp"
+        android:layout_height="51dp"
         android:background="@drawable/dashbuttons"
         android:text="Button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.637"
-        tools:layout_editor_absoluteX="234dp" />
-
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="126dp"
-        android:layout_height="115dp"
-        android:background="@drawable/dashbuttons"
-        android:text="Button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.362"
-        tools:layout_editor_absoluteX="234dp" />
+        app:layout_constraintVertical_bias="0.46"
+        tools:layout_editor_absoluteX="50dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
