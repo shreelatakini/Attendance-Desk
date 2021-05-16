@@ -15,24 +15,29 @@ public class DashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dash);
 
-        //@todo obtain list from database
-        //@todo  and add to the arraylist
-        ArrayList<String> classes = new ArrayList<String>() {
-            {
-                add("DBMS");
-                add("MAD");
-                add("CN");
-                add("CG");
-                add("CNS");
-                add("ML");
-            }
-        };
+//        //@todo obtain list from database
+//        //@todo  and add to the arraylist
+//        ArrayList<String> classes = new ArrayList<String>() {
+//            {
+//                add("DBMS");
+//                add("MAD");
+//                add("CN");
+//                add("CG");
+//                add("CNS");
+//                add("ML");
+//            }
+//        };
+//
+//        ArrayAdapter<String> itemsAdapter;
+//        itemsAdapter = new ArrayAdapter<String>(this, R.layout.arrayadapt , classes);
+//
+//        ListView listView = (ListView) findViewById(R.id.lvItems);
+//        listView.setAdapter(itemsAdapter);
 
-        ArrayAdapter<String> itemsAdapter;
-        itemsAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, classes);
+    // above lines to add to classes page
 
-        ListView listView = (ListView) findViewById(R.id.lvItems);
-        listView.setAdapter(itemsAdapter);
+
+
 
     }
 }
