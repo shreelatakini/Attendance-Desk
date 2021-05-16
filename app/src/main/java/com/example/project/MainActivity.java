@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(MainActivity.this, DashActivity.class);
+                Intent i = new Intent(MainActivity.this, screen2.class);
                 startActivity(i);
             }
         });
