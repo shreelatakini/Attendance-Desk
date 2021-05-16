@@ -17,7 +17,7 @@ public class DashActivity extends AppCompatActivity {
 
 //        //@todo obtain list from database
 //        //@todo  and add to the arraylist
-//        ArrayList<String> classes = new ArrayList<String>() {
+//       ArrayList<String> classes = new ArrayList<String>() {
 //            {
 //                add("DBMS");
 //                add("MAD");

@@ -12,8 +12,6 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,8 +20,7 @@ public class MainActivity extends AppCompatActivity {
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i=new Intent(MainActivity.this,
-                        DashActivity.class);
+                Intent i = new Intent(MainActivity.this, DashActivity.class);
                 startActivity(i);
             }
         });
