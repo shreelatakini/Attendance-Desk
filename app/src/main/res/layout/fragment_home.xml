@@ -10,8 +10,9 @@
         android:id="@+id/b2nd"
         android:layout_width="168dp"
         android:layout_height="109dp"
-        android:background="@drawable/rounded_activity2"
+        android:background="@drawable/rounded_corners"
 
+        android:backgroundTint="#F7E167"
         android:fontFamily="@font/bold"
         android:text="2nd Year"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
@@ -26,8 +27,9 @@
         android:id="@+id/b3rd"
         android:layout_width="157dp"
         android:layout_height="103dp"
-        android:background="@drawable/rounded_activity2"
+        android:background="@drawable/rounded_corners"
 
+        android:backgroundTint="#F7E167"
         android:fontFamily="@font/bold"
         android:text="3rd Year"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
@@ -42,8 +44,9 @@
         android:id="@+id/b1st"
         android:layout_width="154dp"
         android:layout_height="108dp"
-        android:background="@drawable/rounded_activity2"
+        android:background="@drawable/rounded_corners"
 
+        android:backgroundTint="#F7E167"
         android:fontFamily="@font/bold"
         android:text="1st Year"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
@@ -58,8 +61,9 @@
         android:id="@+id/b4th"
         android:layout_width="168dp"
         android:layout_height="102dp"
-        android:background="@drawable/rounded_activity2"
+        android:background="@drawable/rounded_corners"
 
+        android:backgroundTint="#F7E167"
         android:fontFamily="@font/bold"
         android:text="4th Year"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
