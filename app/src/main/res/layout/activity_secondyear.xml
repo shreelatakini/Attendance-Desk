@@ -8,7 +8,7 @@
     tools:context=".ui.home.secondyear">
 
     <Spinner
-        android:id="@+id/spinner"
+        android:id="@+id/sp2"
         android:layout_width="167dp"
         android:layout_height="19dp"
         app:layout_constraintBottom_toBottomOf="parent"
