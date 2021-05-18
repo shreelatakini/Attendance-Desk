@@ -29,7 +29,9 @@ public class NotificationsFragment extends Fragment {
 
     private NotificationsViewModel notificationsViewModel;
 
-
+    private ListView listView;
+    private NotificationAdapter nadapter;
+    private MovieAdapter mAdapter;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -43,16 +45,10 @@ public class NotificationsFragment extends Fragment {
 //                textView.setText(s);
             }
         });
-//        ListView listView = root.findViewById(R.id.listV);
 //
-//
-//       NotificationData values[]= new NotificationData[20];
-//
-//        ArrayAdapter<NotificationData> adapter = new ArrayAdapter<NotificationData>(getActivity(), R.layout.listeve , values);
-//        listView.setAdapter(adapter);
         String classStart= " The class will start soon ";
         String shortBoy=" This nigga has shoertage ";
-        ListView listView = (ListView) root.findViewById(R.id.listV);
+        listView    = (ListView) root.findViewById(R.id.listV);
         ArrayList<NotificationData> notifList = new ArrayList<>();
         notifList.add(new NotificationData(R.mipmap.shortage, "Shreelata" , shortBoy ));
         notifList.add(new NotificationData(R.mipmap.classs, "MAD" ,classStart ));
@@ -63,10 +59,28 @@ public class NotificationsFragment extends Fragment {
         notifList.add(new NotificationData(R.mipmap.shortage, "Tejas" ,shortBoy ));
         notifList.add(new NotificationData(R.mipmap.shortage, "Suraj" ,shortBoy ));
         notifList.add(new NotificationData(R.mipmap.classs, "COD" ,classStart ));
-
-        NotificationAdapter notificationAdapter = new NotificationAdapter(getContext(),notifList);
-        listView.setAdapter(notificationAdapter);
-
+        notifList.add(new NotificationData(R.mipmap.classs, "COD" ,classStart ));
+        notifList.add(new NotificationData(R.mipmap.classs, "COD" ,classStart ));
+        notifList.add(new NotificationData(R.mipmap.classs, "COD" ,classStart ));
+        notifList.add(new NotificationData(R.mipmap.classs, "COD" ,classStart ));
+        notifList.add(new NotificationData(R.mipmap.classs, "COD" ,classStart ));
+         nadapter = new NotificationAdapter(getActivity(),notifList);
+        listView.setAdapter(nadapter);
+//
+//        listView = (ListView)root.findViewById(R.id.listV);
+//        ArrayList<NotificationData> moviesList = new ArrayList<>();
+//        moviesList.add(new NotificationData(R.mipmap.classs, "After Earth" , "2013"));
+//        moviesList.add(new NotificationData(R.drawable.ic_dashboard_black_24dp, "Baby Driver" , "2017"));
+//        moviesList.add(new NotificationData(R.drawable.ic_dashboard_black_24dp, "Deadpool" , "2016"));
+//        moviesList.add(new NotificationData(R.drawable.ic_dashboard_black_24dp, "Divergent" , "2014"));
+//        moviesList.add(new NotificationData(R.drawable.ic_dashboard_black_24dp, "Fight Club" , "1999"));
+//        moviesList.add(new NotificationData(R.drawable.ic_dashboard_black_24dp, "Jaws" , "1975"));
+//        moviesList.add(new NotificationData(R.drawable.ic_dashboard_black_24dp, "Pirates of the Caribbean" , "2011"));
+//        moviesList.add(new NotificationData(R.drawable.ic_dashboard_black_24dp, "Star Wars" , "2016"));
+//        moviesList.add(new NotificationData(R.drawable.ic_dashboard_black_24dp, "The Grey" , "2011"));
+//
+//        nadapter = new NotificationAdapter(getActivity(),moviesList);
+//        listView.setAdapter(nadapter);
         return root;
     }
 }

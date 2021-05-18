@@ -19,9 +19,11 @@
 
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
     android:layout_height="?android:attr/listPreferredItemHeight"
-    android:padding="6dip" >
+    android:background="@color/backgc"
+    android:padding="6dip">
 
     <ImageView
         android:id="@+id/icon"
@@ -32,31 +34,36 @@
         android:layout_marginRight="6dip"
         android:layout_marginBottom="0dp"
         android:contentDescription="TODO"
-        android:src="@drawable/ic_home_black_24dp" />
-
-    <TextView
-        android:id="@+id/name"
-        android:layout_width="fill_parent"
-        android:layout_height="26dip"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_toRightOf="@id/icon"
-        android:ellipsize="marquee"
-        android:maxLines="1"
-        android:text="Description"
-        android:textSize="12sp" />
+        android:src="@drawable/ic_home_black_24dp"
+        app:srcCompat="@mipmap/classs" />
 
     <TextView
         android:id="@+id/details"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/name"
+        android:layout_height="26dip"
         android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignWithParentIfMissing="true"
+        android:layout_alignParentBottom="true"
         android:layout_toRightOf="@id/icon"
+        android:ellipsize="marquee"
+        android:fontFamily="@font/thin"
+        android:maxLines="1"
+        android:text="Description"
+        android:textColor="#FFFFFF"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignWithParentIfMissing="true"
+        android:layout_above="@id/name"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@id/icon"
+        android:fontFamily="@font/bold"
         android:gravity="center_vertical"
         android:text="Example application"
+        android:textColor="#FFFFFF"
         android:textSize="16sp" />
 
 </RelativeLayout>
