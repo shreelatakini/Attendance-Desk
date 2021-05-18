@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Project</string>
+    <string name="app_name">Attendance Desk</string>
     <string name="Login">Login</string>
     <string name="register">Not a user? Register Now .</string>
     <string name="title_activity_screen2">MainActivity</string>
