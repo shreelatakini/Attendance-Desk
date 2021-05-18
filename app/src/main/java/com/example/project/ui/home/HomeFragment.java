@@ -23,7 +23,7 @@ public class HomeFragment extends Fragment {
     private HomeViewModel homeViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        Button one,two;
+        Button one,two,three;
         homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
         View root = inflater.inflate(fragment_home, container, false);
         one = (Button)root.findViewById(R.id.b1st);
@@ -40,6 +40,14 @@ public class HomeFragment extends Fragment {
             public void onClick(View view) {
                 Intent two = new Intent(HomeFragment.this.getActivity(),secondyear.class);
                 startActivity(two);
+            }
+        });
+        three =(Button)root.findViewById(R.id.b3rd);
+        three.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent three = new Intent(HomeFragment.this.getActivity(),thirdyear.class);
+                startActivity(three);
             }
         });
         homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
