@@ -13,14 +13,14 @@ import com.example.project.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class secondyear extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
+public class fourthyear extends AppCompatActivity implements AdapterView.OnItemSelectedListener  {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_secondyear);
-        Spinner yeartwo =(Spinner)findViewById(R.id.sp2);
-        yeartwo.setOnItemSelectedListener((AdapterView.OnItemSelectedListener) this);
+        setContentView(R.layout.activity_fourthyear);
+        Spinner yearfour =(Spinner)findViewById(R.id.sp4);
+        yearfour.setOnItemSelectedListener((AdapterView.OnItemSelectedListener) this);
         List<String> categories = new ArrayList<String>();
         categories.add("Section 'A'");
         categories.add("Section 'B'");
@@ -30,7 +30,7 @@ public class secondyear extends AppCompatActivity implements AdapterView.OnItemS
 
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        yeartwo.setAdapter(dataAdapter);
+        yearfour.setAdapter(dataAdapter);
 
 
     }
@@ -40,5 +40,4 @@ public class secondyear extends AppCompatActivity implements AdapterView.OnItemS
     public void onNothingSelected(AdapterView<?> arg0) {
         // TODO Auto-generated method stub
     }
-
-}
+    }
