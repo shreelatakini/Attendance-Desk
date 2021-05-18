@@ -4,7 +4,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -23,13 +26,17 @@ public class NotificationsFragment extends Fragment {
         notificationsViewModel =
                 new ViewModelProvider(this).get(NotificationsViewModel.class);
         View root = inflater.inflate(R.layout.fragment_notifications, container, false);
-        final TextView textView = root.findViewById(R.id.text_notifications);
+  //      final TextView textView = root.findViewById(R.id.text_notifications);
         notificationsViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
-                textView.setText(s);
+//                textView.setText(s);
             }
         });
+        ListView listView = root.findViewById(R.id.listV);
+
+
+
         return root;
     }
 }
