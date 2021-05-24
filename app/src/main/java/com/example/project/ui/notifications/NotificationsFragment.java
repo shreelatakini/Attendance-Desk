@@ -31,7 +31,6 @@ public class NotificationsFragment extends Fragment {
 
     private ListView listView;
     private NotificationAdapter nadapter;
-    private MovieAdapter mAdapter;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -66,21 +65,7 @@ public class NotificationsFragment extends Fragment {
         notifList.add(new NotificationData(R.mipmap.classs, "COD" ,classStart ));
          nadapter = new NotificationAdapter(getActivity(),notifList);
         listView.setAdapter(nadapter);
-//
-//        listView = (ListView)root.findViewById(R.id.listV);
-//        ArrayList<NotificationData> moviesList = new ArrayList<>();
-//        moviesList.add(new NotificationData(R.mipmap.classs, "After Earth" , "2013"));
-//        moviesList.add(new NotificationData(R.drawable.ic_dashboard_black_24dp, "Baby Driver" , "2017"));
-//        moviesList.add(new NotificationData(R.drawable.ic_dashboard_black_24dp, "Deadpool" , "2016"));
-//        moviesList.add(new NotificationData(R.drawable.ic_dashboard_black_24dp, "Divergent" , "2014"));
-//        moviesList.add(new NotificationData(R.drawable.ic_dashboard_black_24dp, "Fight Club" , "1999"));
-//        moviesList.add(new NotificationData(R.drawable.ic_dashboard_black_24dp, "Jaws" , "1975"));
-//        moviesList.add(new NotificationData(R.drawable.ic_dashboard_black_24dp, "Pirates of the Caribbean" , "2011"));
-//        moviesList.add(new NotificationData(R.drawable.ic_dashboard_black_24dp, "Star Wars" , "2016"));
-//        moviesList.add(new NotificationData(R.drawable.ic_dashboard_black_24dp, "The Grey" , "2011"));
-//
-//        nadapter = new NotificationAdapter(getActivity(),moviesList);
-//        listView.setAdapter(nadapter);
+
         return root;
     }
 }
