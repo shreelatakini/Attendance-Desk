@@ -3,6 +3,7 @@ package com.example.project.ui.notifications;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,8 +22,17 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.project.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 
 public class NotificationsFragment extends Fragment {
@@ -37,6 +47,7 @@ public class NotificationsFragment extends Fragment {
         int rresid = this.getResources().getIdentifier(s1, "mipmap", "com.example.project");
         return rresid;
     }
+
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -58,23 +69,45 @@ public class NotificationsFragment extends Fragment {
         listView    = (ListView) root.findViewById(R.id.listV);
         ArrayList<NotificationData> notifList = new ArrayList<>();
 
-        notifList.add(new NotificationData(R.mipmap.shortage, "Shreelata" , shortBoy ));
-        notifList.add(new NotificationData(getNotifType(nType), "MAD" ,classStart ));
-        notifList.add(new NotificationData(R.mipmap.classs, "CN" ,classStart ));
-        notifList.add(new NotificationData(R.mipmap.shortage, "Shreyas" ,shortBoy ));
-        notifList.add(new NotificationData(R.mipmap.classs, "CG" , classStart));
-        notifList.add(new NotificationData(R.mipmap.shortage, "Shaun" ,shortBoy ));
-        notifList.add(new NotificationData(R.mipmap.shortage, "Tejas" ,shortBoy ));
-        notifList.add(new NotificationData(R.mipmap.shortage, "Suraj" ,shortBoy ));
-        notifList.add(new NotificationData(R.mipmap.classs, "COD" ,classStart ));
-        notifList.add(new NotificationData(R.mipmap.classs, "COD" ,classStart ));
-        notifList.add(new NotificationData(R.mipmap.classs, "COD" ,classStart ));
-        notifList.add(new NotificationData(R.mipmap.classs, "COD" ,classStart ));
-        notifList.add(new NotificationData(R.mipmap.classs, "COD" ,classStart ));
-        notifList.add(new NotificationData(R.mipmap.classs, "COD" ,classStart ));
-         nadapter = new NotificationAdapter(getActivity(),notifList);
-        listView.setAdapter(nadapter);
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference ref = database.getReference();
 
+        //reading data
+        ArrayList<NotificationData> notifListfor = new ArrayList<>();
+
+        ref.addValueEventListener(new ValueEventListener() {
+            JSONObject obj;
+
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                for (DataSnapshot notis: dataSnapshot.getChildren())
+                {
+
+                    int iconid= getNotifType((String) notis.child("type").getValue());
+                    String title=   (String) notis.child("title").getValue();
+                    String details =(String) notis.child("details").getValue();
+
+                    notifList.add(new NotificationData
+                               (
+                                       iconid,
+                                     title,
+                                      details
+                               )
+                                    );
+
+                }
+
+                nadapter = new NotificationAdapter(getActivity(),notifList);
+                listView.setAdapter(nadapter);
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("The read failed: " + databaseError.getCode());
+            }
+        });
         return root;
     }
 }
