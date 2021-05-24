@@ -7,12 +7,12 @@
     android:background="@color/backgc"
     tools:context=".MainActivity">
 
-    <Button
+    <com.google.android.gms.common.SignInButton
         android:id="@+id/b1"
         style="@style/Widget.AppCompat.Button"
-        android:layout_width="202dp"
-        android:layout_height="42dp"
-        android:background="@drawable/rounded_corners"
+        android:layout_width="237dp"
+        android:layout_height="185dp"
+
         android:fontFamily="@font/bold"
         android:text="@string/Login"
         android:textAllCaps="false"
@@ -22,7 +22,7 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.73" />
+        app:layout_constraintVertical_bias="0.55" />
 
     <TextView
         android:id="@+id/t1"
@@ -49,39 +49,5 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.201"
         app:srcCompat="@drawable/comp1" />
-
-    <EditText
-        android:id="@+id/editTextTextPersonName"
-        android:layout_width="250dp"
-        android:layout_height="61dp"
-        android:background="@drawable/rounded_input"
-        android:ems="10"
-        android:fontFamily="@font/thin"
-        android:hint="username"
-        android:inputType="textPersonName"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.453" />
-
-    <EditText
-        android:id="@+id/editTextTextPassword"
-        android:layout_width="250dp"
-        android:layout_height="61dp"
-        android:background="@drawable/rounded_input"
-        android:ems="10"
-        android:fontFamily="@font/thin"
-        android:hint="password"
-        android:inputType="textPassword"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.585" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
