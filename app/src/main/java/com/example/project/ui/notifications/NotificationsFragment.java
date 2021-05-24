@@ -32,6 +32,13 @@ public class NotificationsFragment extends Fragment {
     private ListView listView;
     private NotificationAdapter nadapter;
 
+    int  getNotifType(String s1)
+    {
+        int rresid = this.getResources().getIdentifier(s1, "mipmap", "com.example.project");
+        return rresid;
+    }
+
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         notificationsViewModel =
@@ -47,10 +54,12 @@ public class NotificationsFragment extends Fragment {
 //
         String classStart= " The class will start soon ";
         String shortBoy=" This nigga has shoertage ";
+        String nType="classs";
         listView    = (ListView) root.findViewById(R.id.listV);
         ArrayList<NotificationData> notifList = new ArrayList<>();
+
         notifList.add(new NotificationData(R.mipmap.shortage, "Shreelata" , shortBoy ));
-        notifList.add(new NotificationData(R.mipmap.classs, "MAD" ,classStart ));
+        notifList.add(new NotificationData(getNotifType(nType), "MAD" ,classStart ));
         notifList.add(new NotificationData(R.mipmap.classs, "CN" ,classStart ));
         notifList.add(new NotificationData(R.mipmap.shortage, "Shreyas" ,shortBoy ));
         notifList.add(new NotificationData(R.mipmap.classs, "CG" , classStart));
