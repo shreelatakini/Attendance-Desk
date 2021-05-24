@@ -42,9 +42,9 @@ public class firstyear extends AppCompatActivity implements AdapterView.OnItemSe
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
     TextView tv;
-    String nTitles;
-    String nDetails;
-    String switch1;
+    String nTitless;
+    String nDetailss;
+    String switch1="shortage";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,7 +77,7 @@ public class firstyear extends AppCompatActivity implements AdapterView.OnItemSe
                 }
                 else
                 {
-                    simpleSwitch.setText(" Shortage ");
+                    simpleSwitch.setText("Shortage ");
                     switch1="shortage";
                 }
 
@@ -88,45 +88,9 @@ public class firstyear extends AppCompatActivity implements AdapterView.OnItemSe
 
             @Override
             public void onClick(View v) {
-                nDetails = "fdf";
-                nTitles = "fd";
-                HashMap<String,Object> map = new HashMap<>();
-                map.put("title", nTitles);
-                map.put("details", nDetails);
-                map.put("type",switch1);
-                Toast.makeText(firstyear.this," ready to send",Toast.LENGTH_LONG).show();
+                nDetailss = (String) nD.getText().toString();
+                nTitless = (String) nT.getText().toString();
 
-
-//                firebaseDatabase = FirebaseDatabase.getInstance();
-//                databaseReference = firebaseDatabase.getReference();
-//                databaseReference.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                String value = snapshot.getValue(String.class);
-//                tv.setText(value);
-//            }
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error)
-//            {
-//                    Toast.makeText(firstyear.this, "Fail to get data.", Toast.LENGTH_SHORT).show();
-//
-//            }
-//            })  ;
-
-
-                FirebaseDatabase.getInstance().getReference().child("nMdgr").push()
-                        .setValue(map).
-                        addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull @NotNull Task<Void> task) {
-                                Log.i(" Push ","completed ");
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull @NotNull Exception e) {
-                        Log.i(" Push ","failed");
-                    }
-                });
 
             }
         });

@@ -31,11 +31,13 @@ public class NotificationsFragment extends Fragment {
 
     private ListView listView;
     private NotificationAdapter nadapter;
+
     int  getNotifType(String s1)
     {
         int rresid = this.getResources().getIdentifier(s1, "mipmap", "com.example.project");
         return rresid;
     }
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
