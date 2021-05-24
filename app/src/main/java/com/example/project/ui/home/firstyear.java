@@ -34,6 +34,7 @@ import org.json.JSONObject;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -89,6 +90,7 @@ public class firstyear extends AppCompatActivity implements AdapterView.OnItemSe
         });
 
         clickButton.setOnClickListener( new View.OnClickListener() {
+            String keynade;
 
             @Override
             public void onClick(View v) {
@@ -98,9 +100,10 @@ public class firstyear extends AppCompatActivity implements AdapterView.OnItemSe
                 map.put("title", nTitless);
                 map.put("details", nDetailss);
                 map.put("type",switch1);
-//                Toast.makeText(firstyear.this," ready to send",Toast.LENGTH_LONG).show();
                 final FirebaseDatabase database = FirebaseDatabase.getInstance();
                 DatabaseReference ref = database.getReference();
+
+
                 // reading data from FireBase
                 ref.addValueEventListener(new ValueEventListener() {
                     JSONObject obj;
@@ -110,8 +113,8 @@ public class firstyear extends AppCompatActivity implements AdapterView.OnItemSe
 
                         for (DataSnapshot notis: dataSnapshot.getChildren())
                         {
-
                             Log.i("info obtained ", notis.getKey());
+                            keynade=notis.getKey();
                         }
                     }
 
@@ -120,7 +123,15 @@ public class firstyear extends AppCompatActivity implements AdapterView.OnItemSe
                         System.out.println("The read failed: " + databaseError.getCode());
                     }
                 });
-                        ref.child("nMdgr").setValue(map).
+
+                //writing data to database
+                //Getting the current date
+                Date date = new Date();
+                //This method returns the time in millis
+                long timeMilli = date.getTime();
+
+
+                ref.child(Long.toString(timeMilli)).setValue(map).
                         addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull @NotNull Task<Void> task) {
