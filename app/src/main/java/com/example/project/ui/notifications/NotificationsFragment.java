@@ -22,12 +22,16 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.project.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import org.jetbrains.annotations.NotNull;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -52,6 +56,10 @@ public class NotificationsFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
+
+
+        ArrayList<Integer> arrayremove = new ArrayList<Integer>();
+
         notificationsViewModel =
                 new ViewModelProvider(this).get(NotificationsViewModel.class);
         View root = inflater.inflate(R.layout.fragment_notifications, container, false);
@@ -73,15 +81,13 @@ public class NotificationsFragment extends Fragment {
         DatabaseReference ref = database.getReference();
 
         //reading data
-        ArrayList<NotificationData> notifListfor = new ArrayList<>();
 
         ref.addValueEventListener(new ValueEventListener() {
             JSONObject obj;
-
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-
-                for (DataSnapshot notis: dataSnapshot.getChildren())
+                notifList.clear();
+                for (DataSnapshot notis: dataSnapshot.child("notifications").getChildren())
                 {
 
                     int iconid= getNotifType((String) notis.child("type").getValue());
@@ -108,6 +114,44 @@ public class NotificationsFragment extends Fragment {
                 System.out.println("The read failed: " + databaseError.getCode());
             }
         });
+
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
+                Toast.makeText(getContext(), "cleared ", Toast.LENGTH_SHORT).show();
+                notifList.remove(position);
+                arrayremove.add(position);
+                ref.child("cleared_notifs").child("pos"+position).setValue(position). addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull @NotNull Task<Void> task) {
+                        Log.i(" Push ","completed ");
+
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull @NotNull Exception e) {
+                        Log.i(" Push ","failed");
+                    }
+                });
+                nadapter = new NotificationAdapter(getActivity(),notifList);
+                listView.setAdapter(nadapter);
+            }
+        });
+
+//        ref.child("cleared_notifs").setValue(arrayremove).
+//                addOnCompleteListener(new OnCompleteListener<Void>() {
+//                    @Override
+//                    public void onComplete(@NonNull @NotNull Task<Void> task) {
+//                        Log.i(" Push ","completed ");
+//
+//                    }
+//                }).addOnFailureListener(new OnFailureListener() {
+//            @Override
+//            public void onFailure(@NonNull @NotNull Exception e) {
+//                Log.i(" Push ","failed");
+//            }
+//        });
         return root;
     }
 }

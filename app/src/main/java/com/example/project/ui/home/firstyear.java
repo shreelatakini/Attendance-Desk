@@ -104,25 +104,25 @@ public class firstyear extends AppCompatActivity implements AdapterView.OnItemSe
                 DatabaseReference ref = database.getReference();
 
 
-                // reading data from FireBase
-                ref.addValueEventListener(new ValueEventListener() {
-                    JSONObject obj;
-
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-
-                        for (DataSnapshot notis: dataSnapshot.getChildren())
-                        {
-                            Log.i("info obtained ", notis.getKey());
-                            keynade=notis.getKey();
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                        System.out.println("The read failed: " + databaseError.getCode());
-                    }
-                });
+//                // reading data from FireBase
+//                ref.addValueEventListener(new ValueEventListener() {
+//                    JSONObject obj;
+//
+//                    @Override
+//                    public void onDataChange(DataSnapshot dataSnapshot) {
+//
+//                        for (DataSnapshot notis: dataSnapshot.getChildren())
+//                        {
+//                            Log.i("info obtained ", notis.getKey());
+//                            keynade=notis.getKey();
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onCancelled(DatabaseError databaseError) {
+//                        System.out.println("The read failed: " + databaseError.getCode());
+//                    }
+//                });
 
                 //writing data to database
                 //Getting the current date
@@ -131,11 +131,12 @@ public class firstyear extends AppCompatActivity implements AdapterView.OnItemSe
                 long timeMilli = date.getTime();
 
 
-                ref.child(Long.toString(timeMilli)).setValue(map).
+                ref.child("notifications").child(Long.toString(timeMilli)).setValue(map).
                         addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull @NotNull Task<Void> task) {
                                 Log.i(" Push ","completed ");
+
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                     @Override
@@ -143,7 +144,9 @@ public class firstyear extends AppCompatActivity implements AdapterView.OnItemSe
                         Log.i(" Push ","failed");
                     }
                 });
-
+                nD.setText("");
+                nT.setText("");
+                simpleSwitch.toggle();
             }
         });
 
