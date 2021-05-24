@@ -42,8 +42,8 @@ public class firstyear extends AppCompatActivity implements AdapterView.OnItemSe
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
     TextView tv;
-    String nTitles;
-    String nDetails;
+    String nTitless;
+    String nDetailss;
     String switch1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,10 +88,10 @@ public class firstyear extends AppCompatActivity implements AdapterView.OnItemSe
 
             @Override
             public void onClick(View v) {
-                nDetails = (String) nD.getText();
-                nTitles = (String) nT.getText();
+                nDetailss = (String) nD.getText();
+                nTitless = (String) nT.getText();
 
-                Toast.makeText(firstyear.this,switch1+" "+nDetails+" "+nTitles,Toast.LENGTH_LONG).show();
+                Toast.makeText(firstyear.this,switch1+" "+nDetailss+" "+nTitless,Toast.LENGTH_LONG).show();
 
             }
         });
