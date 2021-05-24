@@ -105,6 +105,9 @@ public class MainActivity extends AppCompatActivity {
             String email = user.getEmail();
             if(isValid(email)) {
                 Intent nxt = new Intent(MainActivity.this, screen2.class);
+                nxt.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                nxt.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                nxt.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                 startActivity(nxt);
             }
             Log.d(TAG, email);
