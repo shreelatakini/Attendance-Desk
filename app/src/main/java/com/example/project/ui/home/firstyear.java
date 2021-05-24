@@ -44,7 +44,7 @@ public class firstyear extends AppCompatActivity implements AdapterView.OnItemSe
     TextView tv;
     String nTitless;
     String nDetailss;
-    String switch1;
+    String switch1="shortage";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,7 +77,7 @@ public class firstyear extends AppCompatActivity implements AdapterView.OnItemSe
                 }
                 else
                 {
-                    simpleSwitch.setText(" Shortage ");
+                    simpleSwitch.setText("Shortage ");
                     switch1="shortage";
                 }
 
@@ -88,10 +88,9 @@ public class firstyear extends AppCompatActivity implements AdapterView.OnItemSe
 
             @Override
             public void onClick(View v) {
-                nDetailss = (String) nD.getText();
-                nTitless = (String) nT.getText();
+                nDetailss = (String) nD.getText().toString();
+                nTitless = (String) nT.getText().toString();
 
-                Toast.makeText(firstyear.this,switch1+" "+nDetailss+" "+nTitless,Toast.LENGTH_LONG).show();
 
             }
         });
