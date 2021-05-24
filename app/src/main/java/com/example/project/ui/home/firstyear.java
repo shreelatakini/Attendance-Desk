@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.example.project.MainActivity;
 import com.example.project.R;
+import com.example.project.ui.notifications.NotificationData;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -28,11 +29,14 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import org.jetbrains.annotations.NotNull;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
 
 
 
@@ -90,7 +94,44 @@ public class firstyear extends AppCompatActivity implements AdapterView.OnItemSe
             public void onClick(View v) {
                 nDetailss = (String) nD.getText().toString();
                 nTitless = (String) nT.getText().toString();
+                HashMap<String,Object> map = new HashMap<>();
+                map.put("title", nTitless);
+                map.put("details", nDetailss);
+                map.put("type",switch1);
+//                Toast.makeText(firstyear.this," ready to send",Toast.LENGTH_LONG).show();
+                final FirebaseDatabase database = FirebaseDatabase.getInstance();
+                DatabaseReference ref = database.getReference();
+                // reading data from FireBase
+                ref.addValueEventListener(new ValueEventListener() {
+                    JSONObject obj;
 
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+
+                        for (DataSnapshot notis: dataSnapshot.getChildren())
+                        {
+
+                            Log.i("info obtained ", notis.getKey());
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        System.out.println("The read failed: " + databaseError.getCode());
+                    }
+                });
+                        ref.child("nMdgr").setValue(map).
+                        addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull @NotNull Task<Void> task) {
+                                Log.i(" Push ","completed ");
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull @NotNull Exception e) {
+                        Log.i(" Push ","failed");
+                    }
+                });
 
             }
         });
