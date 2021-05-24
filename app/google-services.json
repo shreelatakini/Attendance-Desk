@@ -1,41 +1,41 @@
 {
   "project_info": {
-    "project_number": "777938270585",
-    "project_id": "attendance-desk-2ca5d",
-    "storage_bucket": "attendance-desk-2ca5d.appspot.com"
+    "project_number": "102426409986",
+    "project_id": "attendance-desk",
+    "storage_bucket": "attendance-desk.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:777938270585:android:ba6feb7b1bc08ecf3097a8",
+        "mobilesdk_app_id": "1:102426409986:android:a715c38ae3debf952d3b1b",
         "android_client_info": {
           "package_name": "com.example.project"
         }
       },
       "oauth_client": [
         {
-          "client_id": "777938270585-fcm1keij9gpilvhvdulg607ushe7lr4b.apps.googleusercontent.com",
+          "client_id": "102426409986-igarb7nvu7m5ic110m7ssvfnvmfa3k41.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.project",
-            "certificate_hash": "0b04426ba717b57581badde6a36ef5924b5e4aed"
+            "certificate_hash": "f01850e543e52ff31710958b3465fee331d5ae99"
           }
         },
         {
-          "client_id": "777938270585-u1uq3s629g8nmc88kfaut2hmhckuettk.apps.googleusercontent.com",
+          "client_id": "102426409986-jpb0fo9b51ov1viu8omul7r6hjclgcn0.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCOExMRMitV0wo_UbRcg0hKpBvPflv3BOg"
+          "current_key": "AIzaSyBVTvWI5d_EhTIq4E8DYy-xr9XmBgjJc_0"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "777938270585-u1uq3s629g8nmc88kfaut2hmhckuettk.apps.googleusercontent.com",
+              "client_id": "102426409986-jpb0fo9b51ov1viu8omul7r6hjclgcn0.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
