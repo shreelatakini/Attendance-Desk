@@ -130,7 +130,7 @@ public class firstyear extends AppCompatActivity implements AdapterView.OnItemSe
                 //This method returns the time in millis
                 long timeMilli = date.getTime();
 
-
+                
                 ref.child("notifications").child(Long.toString(timeMilli)).setValue(map).
                         addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override

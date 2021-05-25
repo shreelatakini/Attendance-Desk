@@ -58,7 +58,6 @@ public class NotificationsFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
 
 
-        ArrayList<Integer> arrayremove = new ArrayList<Integer>();
 
         notificationsViewModel =
                 new ViewModelProvider(this).get(NotificationsViewModel.class);
@@ -93,14 +92,15 @@ public class NotificationsFragment extends Fragment {
                     int iconid= getNotifType((String) notis.child("type").getValue());
                     String title=   (String) notis.child("title").getValue();
                     String details =(String) notis.child("details").getValue();
-
-                    notifList.add(new NotificationData
-                               (
-                                       iconid,
-                                     title,
-                                      details
-                               )
-                                    );
+                    long nKeys=Long.parseLong(notis.getKey());
+                    NotificationData n1=new NotificationData
+                            (
+                                    iconid,
+                                    title,
+                                    details
+                            );
+                    n1.setnKey(nKeys);
+                    notifList.add(n1);
 
                 }
 
@@ -120,20 +120,20 @@ public class NotificationsFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
                 Toast.makeText(getContext(), "cleared ", Toast.LENGTH_SHORT).show();
-                notifList.remove(position);
-                arrayremove.add(position);
-                ref.child("cleared_notifs").child("pos"+position).setValue(position). addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull @NotNull Task<Void> task) {
-                        Log.i(" Push ","completed ");
+//                ref.child("cleared_notifs").child("pos"+position).setValue(notifList.get(position).getnKey()). addOnCompleteListener(new OnCompleteListener<Void>() {
+//                    @Override
+//                    public void onComplete(@NonNull @NotNull Task<Void> task) {
+//                        Log.i(" Push ","completed ");
+//
+//                    }
+//                }).addOnFailureListener(new OnFailureListener() {
+//                    @Override
+//                    public void onFailure(@NonNull @NotNull Exception e) {
+//                        Log.i(" Push ","failed");
+//                    }
+//                });
+//                notifList.remove(position);
 
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull @NotNull Exception e) {
-                        Log.i(" Push ","failed");
-                    }
-                });
                 nadapter = new NotificationAdapter(getActivity(),notifList);
                 listView.setAdapter(nadapter);
             }

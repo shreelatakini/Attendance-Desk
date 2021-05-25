@@ -8,12 +8,13 @@ public class NotificationData {
     private String nName;
     // Store the release date of the movie
     private String nDetails;
-
+    private long nKey;
     // Constructor that is used to create an instance of the NotificationData object
-    public NotificationData(int cnIcon, String cnName, String cnDetails) {
+    public NotificationData(int cnIcon, String cnName, String cnDetails ) {
         this.nIcon = cnIcon;
         this.nName = cnName;
         this.nDetails = cnDetails;
+        this.nKey=0;
     }
 
     public int getnIcon() {
@@ -39,4 +40,7 @@ public class NotificationData {
     public void setnDetails(String anDetails) {
         this.nDetails = anDetails;
     }
+    public void setnKey(long k){ this.nKey =k;}
+    public long getnKey(){ return this.nKey; }
+
 }
