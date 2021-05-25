@@ -98,8 +98,10 @@ public class firstyear extends AppCompatActivity implements AdapterView.OnItemSe
                 nTitless = (String) nT.getText().toString();
                 HashMap<String,Object> map = new HashMap<>();
                 map.put("classcode", nTitless);
-                map.put("details", nDetailss);
-                map.put("type",switch1);
+                map.put("classdescr", nDetailss);
+                map.put("classname","switch1");
+                map.put("classtime","2pm");
+
                 final FirebaseDatabase database = FirebaseDatabase.getInstance();
                 DatabaseReference ref = database.getReference();
 
@@ -125,8 +127,8 @@ public class firstyear extends AppCompatActivity implements AdapterView.OnItemSe
 //                });
 
                 //writing data to database
-
-                ref.child("1").child("A").setValue("map").
+                System.out.println("executing fuk");
+                ref.child("oh").child("yes").setValue("bruh:18cs696").
                         addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull @NotNull Task<Void> task) {
