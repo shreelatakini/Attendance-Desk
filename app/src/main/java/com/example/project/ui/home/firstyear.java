@@ -125,13 +125,8 @@ public class firstyear extends AppCompatActivity implements AdapterView.OnItemSe
 //                });
 
                 //writing data to database
-                //Getting the current date
-                Date date = new Date();
-                //This method returns the time in millis
-                long timeMilli = date.getTime();
 
-                
-                ref.child("notifications").child(Long.toString(timeMilli)).setValue(map).
+                ref.child("1").child("A").child("classcode").setValue("map").
                         addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull @NotNull Task<Void> task) {
