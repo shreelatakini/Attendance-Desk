@@ -128,7 +128,7 @@ public class firstyear extends AppCompatActivity implements AdapterView.OnItemSe
 
                 //writing data to database
                 System.out.println("executing fuk");
-                ref.child("oh").child("yes").setValue("bruh:18cs696").
+                ref.child("1").child("A").child("students").setValue("holeinthe ass").
                         addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull @NotNull Task<Void> task) {
