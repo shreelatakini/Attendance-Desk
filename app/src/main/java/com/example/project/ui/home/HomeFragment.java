@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -18,7 +19,7 @@ import com.example.project.R;
 
 import static com.example.project.R.layout.fragment_home;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements View.OnClickListener{
 
     private HomeViewModel homeViewModel;
 
@@ -27,37 +28,13 @@ public class HomeFragment extends Fragment {
         homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
         View root = inflater.inflate(fragment_home, container, false);
         one = (Button)root.findViewById(R.id.b1st);
-        one.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent one= new Intent(HomeFragment.this.getActivity() , firstyear.class);
-                startActivity(one);
-            }
-        });
+        one.setOnClickListener(this);
         two =(Button)root.findViewById(R.id.b2nd);
-        two.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent two = new Intent(HomeFragment.this.getActivity(),secondyear.class);
-                startActivity(two);
-            }
-        });
+        two.setOnClickListener(this);
         three =(Button)root.findViewById(R.id.b3rd);
-        three.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent three = new Intent(HomeFragment.this.getActivity(),thirdyear.class);
-                startActivity(three);
-            }
-        });
+        three.setOnClickListener(this);
         four =(Button)root.findViewById(R.id.b4th);
-        four.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent four = new Intent(HomeFragment.this.getActivity(),fourthyear.class);
-                startActivity(four);
-            }
-        });
+        four.setOnClickListener(this);
         homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
@@ -65,5 +42,27 @@ public class HomeFragment extends Fragment {
             }
         });
         return root;
+    }
+
+    @Override
+    public void onClick(View view) {
+        Intent one= new Intent(HomeFragment.this.getActivity() , firstyear.class);
+        Button button = (Button)view;
+        switch (button.getText().toString()){
+            case "1st Year":
+                one.putExtra("Year",1);
+                break;
+            case "2nd Year":
+                one.putExtra("Year",2);
+                break;
+            case "3rd Year":
+                one.putExtra("Year",3);
+                break;
+            case "4th Year":
+                one.putExtra("Year",4);
+                break;
+        }
+        startActivity(one);
+
     }
 }
