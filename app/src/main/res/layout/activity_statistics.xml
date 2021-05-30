@@ -26,34 +26,34 @@
     android:padding="6dip">
 
     <TextView
-        android:id="@+id/descr"
+        android:id="@+id/descrr"
         android:layout_width="405dp"
         android:layout_height="20dp"
-android:layout_below="@id/name"
-         android:ellipsize="marquee"
+        android:layout_below="@id/namee"
+        android:ellipsize="marquee"
         android:fontFamily="@font/thin"
         android:maxLines="2"
         android:text="Description"
         android:textColor="#FFFFFF"
         android:textSize="12sp" />
     <TextView
-        android:id="@+id/absentees"
+        android:id="@+id/absenteess"
         android:layout_width="405dp"
         android:layout_height="20dp"
         android:ellipsize="marquee"
         android:fontFamily="@font/thin"
         android:maxLines="1"
-        android:layout_below="@id/descr"
+        android:layout_below="@id/descrr"
         android:text="Absentees this week : "
         android:textColor="#FFFFFF"
         android:textSize="12sp" />
 
     <TextView
-        android:id="@+id/code"
+        android:id="@+id/codee"
         android:layout_width="208dp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_toEndOf="@id/name"
+        android:layout_toEndOf="@id/namee"
         android:ellipsize="marquee"
         android:fontFamily="@font/regular"
         android:maxLines="1"
@@ -64,7 +64,7 @@ android:layout_below="@id/name"
 
 
     <TextView
-        android:id="@+id/name"
+        android:id="@+id/namee"
         android:layout_width="190dp"
         android:layout_alignParentTop="true"
         android:ellipsize="marquee"
@@ -75,18 +75,11 @@ android:layout_below="@id/name"
         android:textSize="20sp"
         android:layout_height="27dp" />
 
+    <ListView
+        android:layout_below="@id/absenteess"
+        android:id="@+id/listdashview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
-    <!--    <TextView-->
-<!--        android:id="@+id/name"-->
-<!--        android:layout_width="168dp"-->
-<!--        android:layout_height="0dp"-->
-<!--        android:layout_alignWithParentIfMissing="true"-->
-<!--        android:layout_above="@id/name"-->
-<!--        android:layout_alignParentTop="true"-->
-<!--        android:layout_marginBottom="-6dp"-->
-<!--        android:fontFamily="@font/bold"-->
-<!--        android:text="Example application"-->
-<!--        android:textColor="#FFFFFF"-->
-<!--        android:textSize="16sp" />-->
 
 </RelativeLayout>

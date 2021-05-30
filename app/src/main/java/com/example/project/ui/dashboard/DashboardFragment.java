@@ -2,6 +2,7 @@ package com.example.project.ui.dashboard;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,13 +23,18 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.project.R;
 import com.example.project.ui.notifications.NotificationAdapter;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.annotations.NotNull;
 
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -83,6 +89,7 @@ class DashboardAdapter extends ArrayAdapter<DashboardData>
         sublist = list;
     }
 
+    @SuppressLint("SetTextI18n")
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
@@ -95,37 +102,46 @@ class DashboardAdapter extends ArrayAdapter<DashboardData>
         TextView t1 = (TextView)listItem.findViewById(R.id.code);
         TextView t2 = (TextView)listItem.findViewById(R.id.name);
         TextView t3 = (TextView)listItem.findViewById(R.id.descr);
+        TextView t4 = (TextView)listItem.findViewById(R.id.absentees);
 
         t1.setText(cursub.getSubcode());
         t2.setText(cursub.getSubname());
         t3.setText(cursub.getSubdescr());
+        t4.setText( " Absentees this week : " + String.valueOf(cursub.getAbsents()) );
 
         return listItem;
     }
 }
 
 public class DashboardFragment extends Fragment{
+
+
     private ListView listView;
     private DashboardAdapter dadapter;
     private DashboardViewModel dashboardViewModel;
 
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         dashboardViewModel =
-                new ViewModelProvider(this).get(DashboardViewModel.class);
+
+              new ViewModelProvider(this).get(DashboardViewModel.class);
+
         View root = inflater.inflate(R.layout.fragment_dashboard, container, false);
-//        final TextView textView = root.findViewById(R.id.text_dashboard);
+
         dashboardViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
 //                textView.setText(s);
             }
         });
-        Spinner drop;
        ArrayList<DashboardData> subjects = new ArrayList<>();
       listView = (ListView)root.findViewById(R.id.listV);
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference ref = database.getReference();
+
+
+
         ref.addValueEventListener(new ValueEventListener() {
             JSONObject obj;
             @Override
@@ -136,9 +152,7 @@ public class DashboardFragment extends Fragment{
                     for( DataSnapshot sections : yearss.getChildren())
                     {
                         String key=sections.getKey();
-                        Log.i("key1",key);
                         String subc=   (String) String.valueOf(sections.child("classcode").getValue());
-                        Log.i("code",subc);
                         String subn=   (String) String.valueOf(sections.child("classname").getValue());
                         String subd=   (String) String.valueOf(sections.child("classdescr").getValue());
                         long subt= (long)sections.child("classtime").getValue();
@@ -147,9 +161,10 @@ public class DashboardFragment extends Fragment{
                         for( DataSnapshot student : sections.child("students").getChildren())
                         {
                             wpr+=1;
-                            if(Integer.parseInt(String.valueOf(student.child("counter").getValue()))>0)
+                            if(Integer.parseInt(String.valueOf(student.child("counter").getValue()))>=0)
                             {
-                                wab+=Integer.parseInt(String.valueOf(student.child("counter").getValue()));
+                                Log.i("key studeny",student.getKey());
+                                wab+=Integer.parseInt(String.valueOf(student.child("counter").getValue()))+1;
                             }
                         }
                         wpr=(wpr*7)-wab;
@@ -157,10 +172,11 @@ public class DashboardFragment extends Fragment{
                         DashboardData d1=new DashboardData(
                                 subn,subc,subd,wab,wpr,subt
                         );
+                     Log.i("absent", String.valueOf(wab));
                         subjects.add(d1);
 
                     }
-                    
+
                 }
 
                 dadapter = new DashboardAdapter(getActivity(),subjects);
@@ -171,6 +187,56 @@ public class DashboardFragment extends Fragment{
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 System.out.println("The read failed: " + databaseError.getCode());
+            }
+        });
+
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
+
+                String nm= subjects.get(position).getSubname();
+                String cd= subjects.get(position).getSubcode();
+                String dc= subjects.get(position).getSubdescr();
+                String wab =  " Absentees this week : "+String.valueOf(subjects.get(position).getAbsents());
+//                TextView tname ;
+//
+//                tname = (TextView)root.findViewById(R.id.namee);
+//                tname.setText(nm);
+//
+//                tname = (TextView)root.findViewById(R.id.descrr);
+//                tname.setText(dc);
+//
+//                tname = (TextView)root.findViewById(R.id.codee);
+//                tname.setText(cd);
+//
+//                tname = (TextView)root.findViewById(R.id.absenteess);
+//                tname.setText(" Absentees this week : "+wab);
+
+                Intent i = new Intent(getContext() , statistics.class);
+                i.putExtra("name", nm);
+                i.putExtra("code", cd);
+                i.putExtra("desc", dc);
+                i.putExtra("abse", wab);
+                i.putExtra("position", wab);
+                startActivity(i);
+
+
+               //   ref.setValue(subjects.get(position).getSubcode()).addOnCompleteListener(new OnCompleteListener<Void>() {
+//                    @Override
+//                    public void onComplete(@NonNull @NotNull Task<Void> task) {
+//                        Log.i(" Push ","completed ");
+//
+//                    }
+//                }).addOnFailureListener(new OnFailureListener() {
+//                    @Override
+//                    public void onFailure(@NonNull @NotNull Exception e) {
+//                        Log.i(" Push ","failed");
+//                    }
+//                });
+//                notifList.remove(position);
+//
+//                nadapter = new NotificationAdapter(getActivity(),notifList);
+//                listView.setAdapter(nadapter);
             }
         });
 
