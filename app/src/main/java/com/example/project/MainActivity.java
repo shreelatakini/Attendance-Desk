@@ -110,8 +110,12 @@ public class MainActivity extends AppCompatActivity {
                 nxt.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                 startActivity(nxt);
             }
+            else{
+                signOut();
+            }
             Log.d(TAG, email);
         }
+
     }
 
     private boolean isValid(String email){
@@ -126,6 +130,13 @@ public class MainActivity extends AppCompatActivity {
         FirebaseUser currentUser = mAuth.getCurrentUser();
         updateUI(currentUser);
 
+    }
+    private void signOut(){
+        mGoogleSignInClient.signOut().addOnCompleteListener(this, task ->{});
+        FirebaseAuth.getInstance().signOut();
+        Intent i = new Intent(this, MainActivity.class);
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(i);
     }
 
 

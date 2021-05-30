@@ -1,54 +1,54 @@
 package com.example.project.ui.notifications;
 
-import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.bumptech.glide.Glide;
 import com.example.project.MainActivity;
 import com.example.project.R;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import org.jetbrains.annotations.NotNull;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
 
 public class NotificationsFragment extends Fragment {
 
+    private GoogleSignInClient mGoogleSignInClient;
     private NotificationsViewModel notificationsViewModel;
 
     private ListView listView;
     private NotificationAdapter nadapter;
     Button bt1,bt2,bt3;
+    TextView usr;
+    ImageView profileImg;
 
     int  getNotifType(String s1)
     {
@@ -60,20 +60,41 @@ public class NotificationsFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build();
+        //Log.d(TAG, getString(R.string.default_web_client_id));
 
+        mGoogleSignInClient = GoogleSignIn.getClient(requireActivity(), gso);
 
 
         notificationsViewModel =
                 new ViewModelProvider(this).get(NotificationsViewModel.class);
         View root = inflater.inflate(R.layout.fragment_notifications, container, false);
+        profileImg = (ImageView)root.findViewById(R.id.profileImg);
+        usr = (TextView)root.findViewById(R.id.username);
+        FirebaseUser yoosur = FirebaseAuth.getInstance().getCurrentUser();
+        usr.setText(yoosur.getDisplayName());
+
+        Uri personPhoto = yoosur.getPhotoUrl();
+        Glide.with(this).load(String.valueOf(personPhoto)).centerCrop().into(profileImg);
+
+
   //      final TextView textView = root.findViewById(R.id.text_notifications);
         bt1= (Button)root.findViewById(R.id.b6);
+        //signout
         bt1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(NotificationsFragment.this.getActivity(), MainActivity.class));
+                signOut();
             }
+
+
         });
+
+
+
         bt2=(Button)root.findViewById(R.id.b7) ;
         bt2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,10 +117,14 @@ public class NotificationsFragment extends Fragment {
             }
         });
 //
+//
+
+
+
         String classStart= " The class will start soon ";
         String shortBoy=" This nigga has shoertage ";
         String nType="classs";
-        listView    = (ListView) root.findViewById(R.id.listV);
+  //      listView    = (ListView) root.findViewById(R.id.listvw);
         ArrayList<NotificationData> notifList = new ArrayList<>();
 
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -130,8 +155,8 @@ public class NotificationsFragment extends Fragment {
 
                 }
 
-                nadapter = new NotificationAdapter(getActivity(),notifList);
-                listView.setAdapter(nadapter);
+//                nadapter = new NotificationAdapter(getActivity(),notifList);
+//                listView.setAdapter(nadapter);
 
             }
 
@@ -142,42 +167,50 @@ public class NotificationsFragment extends Fragment {
         });
 
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
-                Toast.makeText(getContext(), "cleared ", Toast.LENGTH_SHORT).show();
-//                ref.child("cleared_notifs").child("pos"+position).setValue(notifList.get(position).getnKey()). addOnCompleteListener(new OnCompleteListener<Void>() {
-//                    @Override
-//                    public void onComplete(@NonNull @NotNull Task<Void> task) {
-//                        Log.i(" Push ","completed ");
-//
-//                    }
-//                }).addOnFailureListener(new OnFailureListener() {
-//                    @Override
-//                    public void onFailure(@NonNull @NotNull Exception e) {
-//                        Log.i(" Push ","failed");
-//                    }
-//                });
-//                notifList.remove(position);
-
-                nadapter = new NotificationAdapter(getActivity(),notifList);
-                listView.setAdapter(nadapter);
-            }
-        });
-
-//        ref.child("cleared_notifs").setValue(arrayremove).
-//                addOnCompleteListener(new OnCompleteListener<Void>() {
-//                    @Override
-//                    public void onComplete(@NonNull @NotNull Task<Void> task) {
-//                        Log.i(" Push ","completed ");
-//
-//                    }
-//                }).addOnFailureListener(new OnFailureListener() {
+//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 //            @Override
-//            public void onFailure(@NonNull @NotNull Exception e) {
-//                Log.i(" Push ","failed");
+//            public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
+//                Toast.makeText(getContext(), "cleared ", Toast.LENGTH_SHORT).show();
+////                ref.child("cleared_notifs").child("pos"+position).setValue(notifList.get(position).getnKey()). addOnCompleteListener(new OnCompleteListener<Void>() {
+////                    @Override
+////                    public void onComplete(@NonNull @NotNull Task<Void> task) {
+////                        Log.i(" Push ","completed ");
+////
+////                    }
+////                }).addOnFailureListener(new OnFailureListener() {
+////                    @Override
+////                    public void onFailure(@NonNull @NotNull Exception e) {
+////                        Log.i(" Push ","failed");
+////                    }
+////                });
+////                notifList.remove(position);
+//
+//                nadapter = new NotificationAdapter(getActivity(),notifList);
+//                listView.setAdapter(nadapter);
 //            }
 //        });
-        return root;
+//
+////        ref.child("cleared_notifs").setValue(arrayremove).
+////                addOnCompleteListener(new OnCompleteListener<Void>() {
+////                    @Override
+////                    public void onComplete(@NonNull @NotNull Task<Void> task) {
+////                        Log.i(" Push ","completed ");
+////
+////                    }
+////                }).addOnFailureListener(new OnFailureListener() {
+////            @Override
+////            public void onFailure(@NonNull @NotNull Exception e) {
+////                Log.i(" Push ","failed");
+////            }
+////        });
+//
+            return root;
+    }
+    private void signOut(){
+        mGoogleSignInClient.signOut().addOnCompleteListener(requireActivity(), task ->{});
+        FirebaseAuth.getInstance().signOut();
+        Intent i = new Intent(getActivity(), MainActivity.class);
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(i);
     }
 }
