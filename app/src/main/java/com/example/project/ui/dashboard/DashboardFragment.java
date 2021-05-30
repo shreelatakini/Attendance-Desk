@@ -1,14 +1,18 @@
 package com.example.project.ui.dashboard;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -16,9 +20,82 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.project.R;
+import com.example.project.ui.notifications.NotificationData;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+
+class DashboardData 
+{
+    private String subcode ;
+    private String subname;
+    private int weekpresent;
+    private int weekabsent ;
+    
+    public DashboardData( String subn , String subc, int wab, int wpr)
+    {
+        this.subcode=subc;
+        this.subname=subn;
+        this.weekabsent=wab;
+        this.weekpresent=wpr;
+    }
+    public String getSubcode(){return  subcode;}
+    public String getSubname(){return subname;}
+    public int getPresents(){return weekpresent;}
+    public int getAbsents(){return weekabsent;}
+
+    public String setSubcode(String sc){this.subcode=sc;}
+    public String setSubname(String sn){this.subname=sn;}
+    public int setPresents(int wp){this.weekpresent=wp;}
+    public int setAbsents(int wa){this.weekabsent=wa;}
+
+
+}
+
+class DashboardAdapter extends ArrayAdapter<DashboardData>
+{
+    private Context dcontext;
+    private ArrayList<DashboardData> sublist = new ArrayList<>();
+    public DashboardAdapter(@NonNull Context context,
+                               @SuppressLint("SupportAnnotationUsage") @LayoutRes ArrayList<DashboardData> list)
+    {
+        super(context, 0 , list);
+        dcontext = context;
+        sublist = list;
+    }
+
+    @NonNull
+    @Override
+    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+        View listItem = convertView;
+        if(listItem == null)
+            listItem = LayoutInflater.from(dcontext).inflate(R.layout.listeve,parent,false);
+
+        DashboardData currentNotif = sublist.get(position);
+
+
+
+        TextView name = (TextView) listItem.findViewById(R.id.name);
+        name.setText(currentNotif.getnName());
+
+
+        TextView release = (TextView) listItem.findViewById(R.id.details);
+        release.setText(currentNotif.getnDetails());
+
+
+
+        return listItem;
+    }
+}
+}
 
 public class DashboardFragment extends Fragment{
 
@@ -39,10 +116,37 @@ public class DashboardFragment extends Fragment{
         Spinner drop;
         drop = (Spinner) root.findViewById(R.id.dd);
         List<String> subjects = new ArrayList<String>();
-        subjects.add("18CSE31");
-        subjects.add("17CSE03");
-        subjects.add("19CSE303");
-        subjects.add("20CSE101");
+
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference ref = database.getReference();
+        ref.addValueEventListener(new ValueEventListener() {
+            JSONObject obj;
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                subjects.clear();
+                for (DataSnapshot notis: dataSnapshot.getChildren())
+                {
+                    for( DataSnapshot sections : notis.getChildren())
+                    {
+                        String sub=   (String) sections.child("classcode").getValue();
+                        String subn=   (String) sections.child("classname").getValue();
+                        
+                    }
+                    
+                }
+
+//                nadapter = new NotificationAdapter(getActivity(),notifList);
+//                listView.setAdapter(nadapter);
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("The read failed: " + databaseError.getCode());
+            }
+        });
+
+
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, subjects);
 
         // Drop down layout style - list view with radio button
@@ -59,6 +163,7 @@ public class DashboardFragment extends Fragment{
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
+
 
         });
         return root;
