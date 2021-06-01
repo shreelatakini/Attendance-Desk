@@ -46,7 +46,7 @@ public class NotificationsFragment extends Fragment {
 
     private ListView listView;
     private NotificationAdapter nadapter;
-    Button bt1,bt2,bt3;
+    Button bt1,bt2,bt3,ubtn;
     TextView usr;
     ImageView profileImg;
 
@@ -110,6 +110,16 @@ public class NotificationsFragment extends Fragment {
             public void onClick(View v) {
                 startActivity(new Intent(NotificationsFragment.this.getActivity(),support.class));
             }
+        });
+        ubtn=(Button)root.findViewById(R.id.urlbtn);
+        ubtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                gotoUrl("http://guru.nmamit.in/");
+            }
+
+
         });
 
         notificationsViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
@@ -208,6 +218,12 @@ public class NotificationsFragment extends Fragment {
 //
             return root;
     }
+
+    private void gotoUrl(String s) {
+        Uri uri= Uri.parse(s);
+        startActivity(new Intent(Intent.ACTION_VIEW,uri) );
+    }
+
     private void signOut(){
         mGoogleSignInClient.signOut().addOnCompleteListener(requireActivity(), task ->{});
         FirebaseAuth.getInstance().signOut();
