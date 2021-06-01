@@ -30,20 +30,35 @@
         android:layout_width="405dp"
         android:layout_height="20dp"
         android:layout_below="@id/namee"
+        android:background="#222B39"
         android:ellipsize="marquee"
         android:fontFamily="@font/thin"
         android:maxLines="2"
+        android:paddingStart="2dp"
+        android:paddingLeft="2dp"
+        android:paddingTop="2dp"
+        android:paddingEnd="2dp"
+        android:paddingRight="2dp"
+        android:paddingBottom="2dp"
         android:text="Description"
         android:textColor="#FFFFFF"
         android:textSize="12sp" />
+
     <TextView
         android:id="@+id/absenteess"
         android:layout_width="405dp"
         android:layout_height="20dp"
+        android:layout_below="@id/descrr"
+        android:background="#222B39"
         android:ellipsize="marquee"
         android:fontFamily="@font/thin"
         android:maxLines="1"
-        android:layout_below="@id/descrr"
+        android:paddingStart="2dp"
+        android:paddingLeft="2dp"
+        android:paddingTop="2dp"
+        android:paddingEnd="2dp"
+        android:paddingRight="2dp"
+        android:paddingBottom="2dp"
         android:text="Absentees this week : "
         android:textColor="#FFFFFF"
         android:textSize="12sp" />
@@ -54,9 +69,16 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_toEndOf="@id/namee"
+        android:background="#222B39"
         android:ellipsize="marquee"
         android:fontFamily="@font/regular"
         android:maxLines="1"
+        android:paddingStart="2dp"
+        android:paddingLeft="2dp"
+        android:paddingTop="2dp"
+        android:paddingEnd="2dp"
+        android:paddingRight="2dp"
+        android:paddingBottom="2dp"
         android:text="code"
         android:textAlignment="textEnd"
         android:textColor="#ffffff"
@@ -66,20 +88,28 @@
     <TextView
         android:id="@+id/namee"
         android:layout_width="190dp"
+        android:layout_height="27dp"
         android:layout_alignParentTop="true"
+        android:background="#222B39"
         android:ellipsize="marquee"
         android:fontFamily="@font/bold"
         android:maxLines="1"
+        android:paddingStart="2dp"
+        android:paddingLeft="2dp"
+        android:paddingTop="2dp"
+        android:paddingEnd="2dp"
+        android:paddingRight="2dp"
+        android:paddingBottom="2dp"
         android:text="Name"
         android:textColor="#FFFFFF"
-        android:textSize="20sp"
-        android:layout_height="27dp" />
+        android:textSize="20sp" />
 
     <ListView
-        android:layout_below="@id/absenteess"
         android:id="@+id/listdashview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_below="@id/absenteess"
+        android:background="@color/backgc" />
 
 
 </RelativeLayout>
