@@ -76,11 +76,12 @@ public class AttendanceAdapter extends ArrayAdapter<AttendanceData> {
             cb.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if(cb.isChecked())
-                        currentNotif.setAttendance(1);
-                    else
+                    if(cb.isChecked()) {
                         currentNotif.setAttendance(0);
-
+                        currentNotif.setCounter(1);
+                    }else{
+                        currentNotif.setAttendance(1);
+                    }
                 }
             });
             return listItem;

@@ -166,6 +166,11 @@ public class firstyear extends AppCompatActivity implements AdapterView.OnItemSe
                 }
 
                 //writing data to database
+                //set counter value
+                for(AttendanceData ad : adata ){
+                    ref.child(String.valueOf(year)).child(section).child("weekdays").child(dayWeekText).child(ad.getstudusn())
+                            .child("counter").setValue(ad.getCounter());
+                }
 
                 simpleSwitch.toggle();
             }

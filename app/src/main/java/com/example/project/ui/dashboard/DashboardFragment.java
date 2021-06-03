@@ -163,7 +163,7 @@ public class DashboardFragment extends Fragment{
                             wpr+=1;
                             if(Integer.parseInt(String.valueOf(student.child("counter").getValue()))>=0)
                             {
-                                Log.i("key studeny",student.getKey());
+                                Log.i("key student",student.getKey());
                                 wab+=Integer.parseInt(String.valueOf(student.child("counter").getValue()))+1;
                             }
                         }
