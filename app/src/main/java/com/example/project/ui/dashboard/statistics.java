@@ -182,7 +182,7 @@ public class statistics extends AppCompatActivity {
                             for( DataSnapshot student : sections.child("students").getChildren()) {
                                 Log.i("key student", student.getKey());
                                 int absence=Integer.parseInt(String.valueOf(student.child("counter").getValue()));
-                                if(absence>-2) {
+                                if(absence>0) {
 
                                     int iconid;
                                     String absn;

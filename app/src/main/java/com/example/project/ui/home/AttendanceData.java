@@ -12,6 +12,8 @@ public class AttendanceData {
     // Store the release date of the movie
     private int attendance;
     private int counter;
+    private String year ;
+    private String section;
 //    private long nKey;
     // Constructor that is used to create an instance of the NotificationData object
     public AttendanceData( String cstudname, int cattend ) {
@@ -27,6 +29,23 @@ public class AttendanceData {
     public String getstudusn() {
         return studusn;
     }
+
+    public void setYr(String yr) {
+        this.year=yr;
+    }
+
+    public void setSx(String sx) {
+       this.section=sx;
+    }
+
+    public String getYr() {
+        return year;
+    }
+    public String getSx() {
+        return section;
+    }
+
+
 
     public void setStudusn(String usn) {
         this.studusn = usn;

@@ -168,9 +168,9 @@ public class firstyear extends AppCompatActivity implements AdapterView.OnItemSe
                 //writing data to database
                 //set counter value
                 for(AttendanceData ad : adata ){
+
                     ref.child(String.valueOf(year)).child(section).child("students").child(ad.getstudusn())
-                            .child("counter").setValue( ref.child(String.valueOf(year)).child(section).child("students").child(ad.getstudusn())
-                            .child("counter").getValue() + ad.getCounter());
+                            .child("counter").setValue( ad.getCounter());
                 }
 
 
@@ -216,6 +216,8 @@ public class firstyear extends AppCompatActivity implements AdapterView.OnItemSe
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 AttendanceData ad = snapshot.getValue(AttendanceData.class);
                 ad.setStudusn(snapshot.getKey());
+                ad.setSx(section);
+                ad.setYr(Integer.toString(year));
                 attendanceDataList.add(ad);
                 AttendanceAdapter apt = new AttendanceAdapter(getBaseContext(), attendanceDataList);
                 lv.setAdapter(apt);
