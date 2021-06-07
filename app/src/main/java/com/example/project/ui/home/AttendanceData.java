@@ -13,6 +13,7 @@ public class AttendanceData {
     private int attendance;
     private int counter;
     private String year ;
+    private String daye ;
     private String section;
 //    private long nKey;
     // Constructor that is used to create an instance of the NotificationData object
@@ -21,6 +22,7 @@ public class AttendanceData {
         this.counter = 0;
         this.name = cstudname;
         this.attendance = cattend;
+        System.out.println(" cattend for "+studusn +" is  "+cattend);
 //        this.nKey=0;
     }
     public AttendanceData(){}
@@ -37,12 +39,19 @@ public class AttendanceData {
     public void setSx(String sx) {
        this.section=sx;
     }
+    public void setDaye(String dy) {
+        this.daye=dy;
+    }
+
 
     public String getYr() {
         return year;
     }
     public String getSx() {
         return section;
+    }
+    public String getDaye() {
+        return daye;
     }
 
 

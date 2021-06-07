@@ -171,6 +171,7 @@ public class firstyear extends AppCompatActivity implements AdapterView.OnItemSe
 
                     ref.child(String.valueOf(year)).child(section).child("students").child(ad.getstudusn())
                             .child("counter").setValue( ad.getCounter());
+                    System.out.println(" set the value of counter for  "+ad.getName()+" as "+ad.getCounter());
                 }
 
 
@@ -215,6 +216,7 @@ public class firstyear extends AppCompatActivity implements AdapterView.OnItemSe
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 AttendanceData ad = snapshot.getValue(AttendanceData.class);
+                ad.setDaye(dayWeekText);
                 ad.setStudusn(snapshot.getKey());
                 ad.setSx(section);
                 ad.setYr(Integer.toString(year));

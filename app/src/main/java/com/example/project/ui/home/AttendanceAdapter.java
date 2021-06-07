@@ -49,10 +49,9 @@ import java.util.List;
 
 
 public class AttendanceAdapter extends ArrayAdapter<AttendanceData> {
-
+    int sts;
     final FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference ref = database.getReference();
-    int sts;
         private Context nContext;
         private List<AttendanceData> attendlist = new ArrayList<>();
 
@@ -81,6 +80,8 @@ public class AttendanceAdapter extends ArrayAdapter<AttendanceData> {
 
             TextView usn = (TextView) listItem.findViewById(R.id.details);
             usn.setText(currentNotif.getstudusn());
+            CheckBox cb = (CheckBox) listItem.findViewById(R.id.present);
+            cb.setChecked(false);
 
 
             ref.addValueEventListener(new ValueEventListener() {
@@ -89,6 +90,20 @@ public class AttendanceAdapter extends ArrayAdapter<AttendanceData> {
                 public void onDataChange(DataSnapshot dataSnapshot) {
 
                 sts= Integer.parseInt(String.valueOf(dataSnapshot.child(currentNotif.getYr()).child(currentNotif.getSx()).child("students").child(currentNotif.getstudusn()).child("counter").getValue()));
+                    System.out.println(" the value of sts "+ sts+ " , for , "+currentNotif.getName());
+                currentNotif.setCounter(sts);
+
+                int att;
+                    att = Integer.parseInt(String.valueOf(dataSnapshot.child(currentNotif.getYr()).child(currentNotif.getSx()).child("weekdays").child(currentNotif.getDaye()).child(currentNotif.getstudusn())
+                                .child("attendance").getValue()));
+                currentNotif.setAttendance(att);
+                System.out.println("set attendance of "+currentNotif.getName()+" on "+currentNotif.getDaye()+" to "+currentNotif.getAttendance());
+
+                    if(currentNotif.getAttendance()==0)
+                    {
+                        cb.setChecked(true);
+                        System.out.println(" set checked tru");
+                    }
 
                 }
 
@@ -97,25 +112,22 @@ public class AttendanceAdapter extends ArrayAdapter<AttendanceData> {
                     System.out.println("The read failed: " + databaseError.getCode());
                 }
             });
-
-
-
-            CheckBox cb = (CheckBox) listItem.findViewById(R.id.present);
-            cb.setChecked(false);
             cb.setTag(usn);
-            currentNotif.setCounter(0);
+
+
             cb.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
 
                     if(cb.isChecked()) {
                         currentNotif.setAttendance(0);
-                        currentNotif.setCounter(sts+1);
-                        Log.i("settingcounter",Integer.toString(currentNotif.getCounter()));
+                        currentNotif.setCounter(currentNotif.getCounter()+1);
+                        Log.i("settingcounter : "+currentNotif.getName()+" : ",Integer.toString(currentNotif.getCounter()));
                     }else{
                         currentNotif.setAttendance(1);
+                        currentNotif.setCounter(currentNotif.getCounter()-1);
+
                     }
-                    currentNotif.setCounter(0);
                 }
             });
             return listItem;

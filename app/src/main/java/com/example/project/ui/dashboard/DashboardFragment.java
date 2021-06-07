@@ -82,9 +82,11 @@ class DashboardAdapter extends ArrayAdapter<DashboardData>
     private Context dcontext;
     private ArrayList<DashboardData> sublist = new ArrayList<>();
     public DashboardAdapter(@NonNull Context context,
-                               @SuppressLint("SupportAnnotationUsage") @LayoutRes ArrayList<DashboardData> list)
+                               @SuppressLint("SupportAnnotationUsage") @LayoutRes ArrayList<DashboardData> list) throws Exception
     {
-        super(context, 0 , list);
+
+            super(context, 0, list);
+
         dcontext = context;
         sublist = list;
     }
@@ -161,10 +163,10 @@ public class DashboardFragment extends Fragment{
                         for( DataSnapshot student : sections.child("students").getChildren())
                         {
                             wpr+=1;
-                            if(Integer.parseInt(String.valueOf(student.child("counter").getValue()))>=0)
+                            if(Integer.parseInt(String.valueOf(student.child("counter").getValue()))>0)
                             {
                                 Log.i("key student",student.getKey());
-                                wab+=Integer.parseInt(String.valueOf(student.child("counter").getValue()))+1;
+                                wab+=Integer.parseInt(String.valueOf(student.child("counter").getValue()));
                             }
                         }
                         wpr=(wpr*7)-wab;
@@ -178,9 +180,14 @@ public class DashboardFragment extends Fragment{
                     }
 
                 }
-
-                dadapter = new DashboardAdapter(getActivity(),subjects);
-                listView.setAdapter(dadapter);
+                try {
+                    dadapter = new DashboardAdapter(getContext(), subjects);
+                }
+                catch (Exception r)
+                {
+                    System.out.println(r);
+                }
+                    listView.setAdapter(dadapter);
 
            }
 
