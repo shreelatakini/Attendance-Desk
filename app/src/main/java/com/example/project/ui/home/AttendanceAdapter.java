@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -115,9 +116,10 @@ public class AttendanceAdapter extends ArrayAdapter<AttendanceData> {
             cb.setTag(usn);
 
 
-            cb.setOnClickListener(new View.OnClickListener() {
+            cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
                 @Override
-                public void onClick(View view) {
+                public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
 
                     if(cb.isChecked()) {
                         currentNotif.setAttendance(0);
@@ -126,6 +128,8 @@ public class AttendanceAdapter extends ArrayAdapter<AttendanceData> {
                     }else{
                         currentNotif.setAttendance(1);
                         currentNotif.setCounter(currentNotif.getCounter()-1);
+                        Log.i("settingcounter : "+currentNotif.getName()+" : ",Integer.toString(currentNotif.getCounter()));
+
 
                     }
                 }

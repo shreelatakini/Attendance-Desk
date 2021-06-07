@@ -169,8 +169,10 @@ public class firstyear extends AppCompatActivity implements AdapterView.OnItemSe
                 //set counter value
                 for(AttendanceData ad : adata ){
 
+                    int adc=ad.getCounter();
+                    //adc=0;
                     ref.child(String.valueOf(year)).child(section).child("students").child(ad.getstudusn())
-                            .child("counter").setValue( ad.getCounter());
+                            .child("counter").setValue( adc);
                     System.out.println(" set the value of counter for  "+ad.getName()+" as "+ad.getCounter());
                 }
 
